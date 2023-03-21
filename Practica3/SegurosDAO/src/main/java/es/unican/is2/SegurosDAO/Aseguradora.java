@@ -19,7 +19,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Aseguradora {
 	
 	// Reemplazar con el Path dónde almacenéis el fichero ayuntamiento.xml
-	public static String DATA_FILE = "C:\\Temp\\aseguradora.xml";
+	//public static String DATA_FILE = "C:\\Temp\\aseguradora.xml";
+	public static String DATA_FILE = "//mnt//c//Users//X421FAY//Desktop//aseguradora.xml";
 
 	@XmlElement(required = true, name="cliente")
 	private List<Cliente> clientes;

@@ -19,8 +19,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @XmlType(name = "Seguro")
 public class Seguro {
 	
-	private static final double PORCENTAJE_TRAMO_1 = 0.95;
-	private static final double PORCENTAJE_TRAMO_2 = 0.80;
+	private static final double PORCENTAJE_TRAMO_1 = 0.05;
+	private static final double PORCENTAJE_TRAMO_2 = 0.20;
 	private static final int INICIO_TRAMO_1= 90;
 	private static final int FIN_TRAMO_1=110;
 	private static final double DESCUENTO_PRIMER_ANHO = 0.8;
@@ -92,7 +92,33 @@ public class Seguro {
      * @return
      */
     public double precio() {
-    	return 0;
+    	
+    	double pago = 0;
+    	if (cobertura == Cobertura.TERCEROS) {
+    		pago = 400;
+    	} else if (cobertura == Cobertura.TERCEROSLUNAS) {
+    		pago = 600;
+    	} else {
+    		pago = 1000;
+    	}
+    	
+    	if (this.potencia > FIN_TRAMO_1) {
+    		pago = pago + (pago * PORCENTAJE_TRAMO_2);
+    	} else if (this.potencia > INICIO_TRAMO_1) {
+    		pago = pago + (pago * PORCENTAJE_TRAMO_1);
+    	}
+    	
+    	LocalDate fechaActual = LocalDate.now();
+    	int anhos = fechaActual.getYear() - this.fechaContratacion.getYear();
+    	
+    	if (anhos < 1) {
+    		pago = pago * DESCUENTO_PRIMER_ANHO;
+    	} else if (anhos < 2) {
+    		pago = pago * DESCUENTO_SEGUNDO_ANHO;
+    	}
+    	
+    	
+    	return pago;
     }
 
 }
