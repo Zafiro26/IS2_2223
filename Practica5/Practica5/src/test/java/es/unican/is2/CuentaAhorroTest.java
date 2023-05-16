@@ -9,18 +9,21 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class CuentaAhorroTest {
+	
 	private CuentaAhorro sut;
 	private static Movimiento m1, m2, m3;
 	
 	@BeforeAll
 	public static void inicializaAuxiliares() {
-		m1 = new Movimiento();
+		LocalDateTime now = LocalDateTime.now();
+		m1 = new Movimiento(null, null, 100);
 		m1.setI(100);
-		m2 = new Movimiento();
+		m2 = new Movimiento(null, null, 200);
 		m2.setI(200);
-		m3 = new Movimiento();
+		m3 = new Movimiento(null, null, 1500);
 		m3.setI(1500);
 	}
 
@@ -175,6 +178,7 @@ public class CuentaAhorroTest {
 		}
 	
 	}
+	
 
 	
 }

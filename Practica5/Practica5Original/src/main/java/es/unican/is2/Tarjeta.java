@@ -1,3 +1,4 @@
+package es.unican.is2;
 public abstract class Tarjeta {
 	
 	protected String mNumero, mTitular;		
